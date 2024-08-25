@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+    .swiper {
+      margin: 100px auto;
+      width: 320px;
+      height: 240px;
+      overflow: visible;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .swiper-slide {
+      background-color: rgb(160, 160, 160);
+    }
+    [data-component="stacked-carousel"] .swiper-slide {
+        transform-origin: right !important;
+    }
+    [data-component="stacked-carousel"] .swiper-slide-active ~ .swiper-slide, [data-component="stacked-carousel"] .swiper-slide-next ~ .swiper-slide {
+        visibility: hidden;
+    }
+    [data-component="stacked-carousel"] .swiper-slide-active + .swiper-slide, [data-component="stacked-carousel"] .swiper-slide-next + .swiper-slide {
+        visibility: visible;
+    }
+    [data-component="stacked-carousel"] .swiper-slide-active + .swiper-slide, [data-component="stacked-carousel"] .swiper-slide-next + .swiper-slide {
+        background: #5c8c85;
+    }
+    [data-component="stacked-carousel"] .swiper-slide-active + .swiper-slide + .swiper-slide, [data-component="stacked-carousel"] .swiper-slide-next + .swiper-slide + .swiper-slide {
+        background: #337068;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="swiper header-swiper-main" data-component="stacked-carousel">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">Slide 4</div>
+          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide">Slide 6</div>
+          <div class="swiper-slide">Slide 7</div>
+          <div class="swiper-slide">Slide 8</div>
+          <div class="swiper-slide">Slide 9</div>
+        </div>
+        <button data-next-button="" type="button">Next</button>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.4.1/swiper-bundle.min.js" integrity="sha512-3Ei7OPFo83kw3cPbDLeLhn/YF8tZB7Vs8sfli0B/KEekureL5eosDeshYFICCvt4K8i0yUil/lK3cSiic2Wjkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+// var swiper = new Swiper(".header-swiper-main", {
+//     slidesPerView: 1,
+//     effect: "creative",
+//     grabCursor: !0,
+//     watchSlidesProgress: !0,
+//     creativeEffect: {
+//         perspective: !0,
+//         limitProgress: 5,
+//         prev: {
+//             shadow: !0,
+//             translate: 20,
+//             rotate: [0, 0, 0],
+//             scale: 1
+//         },
+//         next: {
+//             shadow: !0,
+//             translate: 30,
+//             scale: 1
+//         },
+//     },
+//     speed: 300,
+//     observer: !0,
+//     observeParents: !0,
+//     on: {
+//         setTranslate(r) {
+//             let t = r.slides;
+//             t.forEach((r) => {
+//                 let s = r.progress,
+//                     a = r.querySelector(".header-swiper-shadow"),
+//                     l = r.current;
+//                 if (l ? s < 0 : s > 0) {
+//                     let e = 1 / (t.length - 1);
+//                     a.style.opacity = e * Math.abs(s);
+//                 } else a.style.opacity = 0;
+//             });
+//         },
+//         // setTransition(e, r) {
+//         //     let t = e.slides;
+//         //     t.forEach((e) => {
+//         //         let t = e.querySelector(".header-swiper-shadow");
+//         //         t.style.transitionDuration = "".concat(r, "ms");
+//         //     });
+//         // },
+//     },
+// });
+
+// var swiper = new Swiper(".header-swiper-main", {
+//     grabCursor: true,
+//     effect: "creative",
+//     creativeEffect: {
+//     prev: {
+//         shadow: true,
+//         translate: [0, 0, -400],
+//     },
+//     next: {
+//         translate: ["100%", 0, 0],
+//     },
+//     },
+// });
+
+function U(t, e) {
+    return t.transformEl ? e.find(t.transformEl).css({ "backface-visibility": "hidden", "-webkit-backface-visibility": "hidden" }) : e;
+}
+const  T = function (t) {
+    let e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+    return e ? window.innerWidth < t : window.innerWidth >= t;
+};
+const h = 768;
+const t = T(h);
+
+document.querySelectorAll('[data-component="stacked-carousel"]').forEach((e) => {
+const s = e.querySelector("[data-next-button]"),
+    i = new Swiper(e, {
+        init: !1,
+        effect: "cards",
+        perspective: !0,
+        allowTouchMove: !1,
+        watchSlidesProgress: !0,
+        virtualTranslate: !0,
+        loopedSlides: 3,
+        preventInteractionOnTransition: !1,
+        speed: 700,
+        loop: !0,
+        on: {
+            setTranslate: (e) => {
+                const { slides: s } = e,
+                    i = { slideShadows: !1, transformEl: null }; 
+                for (let e = 0; e < s.length; e += 1) {
+                    const o = s[e],
+                        n = o.progress,
+                        r = Math.min(Math.max(n, -4), 4),
+                        a = o.swiperSlideOffset;
+                        
+                    let h = -Math.abs(Math.round(n)) + s.length,
+                        l = t ? 20 * (0 - r) - a : 1 - r - a,
+                        c = t ? 0 : "".concat(10 * -(0 - r), "px"),
+                        d = 1 + 0.05 * r;
+                    r < 0 ? (l = "".concat(l, "px")) : r > 0 ? ((l = "".concat(l, "px")), (c = "200vh"), (d = 0.5), (h = s.length + 1)) : (l = "".concat(l, "px"));
+                    const u = "".concat(r < 0 ? 1 + (1 - d) * r : 1 - (1 - d) * r),
+                        m = "translate3d(".concat(l, ", ").concat(c, ", 0px) scale(").concat(u, ")");
+                    (o.style.zIndex = h), U(i, o).style.transform = m;
+                    
+                }
+            },
+            setTransition: (t, e) => {
+                t.slides.map(item=>{
+                    item.style.transitionDuration = "".concat(e, "ms");
+                }),
+
+                    (function (t) {
+                        const { swiper: e, duration: s, transformEl: i, allSlides: o } = t,
+                            { slides: n, activeIndex: r, wrapperEl: a } = e;                            
+                        if (e.params.virtualTranslate && 0 !== s) {
+                            let t,
+                                s = !1;
+                            (t = o ? (i ? n.find(i) : n) : i ? n[r].find(i) : n[r]),
+                            t.addEventListener('transitionend', () => {
+                                    if (s) return;
+                                    if (!e || e.destroyed) return;
+                                    (s = !0), (e.animating = !1);
+                                    const t = ["webkitTransitionEnd", "transitionend"];
+                                    for (let e = 0; e < t.length; e += 1) $(a).trigger(t[e]);
+                                })
+                            
+                        }
+                    })({ swiper: t, duration: e, transformEl: null });
+            },
+        },
+    }),
+    o = () => i.slideNext();
+    s && s.addEventListener("click", o),
+    e.addEventListener("click", o),
+    i.init()
+});
+</script>
+</body>
+</html>
